@@ -1,0 +1,275 @@
+/* =============================================
+   UniReg - Student Management System Styles
+   COMP 467 Advanced Web Applications
+   ============================================= */
+
+/* ---- CSS Variables ---- */
+:root {
+    --primary:       #2563eb;
+    --primary-dark:  #1d4ed8;
+    --success:       #16a34a;
+    --warning:       #d97706;
+    --danger:        #dc2626;
+    --purple:        #7c3aed;
+    --bg:            #f8fafc;
+    --card-bg:       #ffffff;
+    --nav-bg:        #1e293b;
+    --text:          #1e293b;
+    --text-muted:    #64748b;
+    --border:        #e2e8f0;
+    --radius:        0.75rem;
+    --shadow:        0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-md:     0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+}
+
+/* ---- Base ---- */
+*,*::before,*::after { box-sizing: border-box; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---- Navbar ---- */
+#mainNav {
+    background-color: var(--nav-bg);
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    padding: .75rem 0;
+}
+
+#mainNav .navbar-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.35rem;
+    letter-spacing: -.5px;
+    color: #fff;
+}
+
+#mainNav .nav-link {
+    color: rgba(255,255,255,.7);
+    font-size: .875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    padding: .4rem .75rem;
+    transition: background .15s, color .15s;
+}
+#mainNav .nav-link:hover,
+#mainNav .nav-link.active {
+    background: rgba(255,255,255,.1);
+    color: #fff;
+}
+
+/* ---- Main content grows to push footer ---- */
+main { flex: 1; }
+
+/* ---- Footer ---- */
+.footer {
+    background: var(--nav-bg);
+    color: rgba(255,255,255,.5);
+    font-size: .8rem;
+    margin-top: auto;
+}
+
+/* ---- Page titles ---- */
+.page-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: .2rem;
+}
+.section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* ---- Cards ---- */
+.card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+.card-header {
+    background: #f1f5f9;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius) var(--radius) 0 0 !important;
+}
+.card-footer {
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+    padding: .6rem 1.25rem;
+    border-radius: 0 0 var(--radius) var(--radius) !important;
+}
+
+/* ---- Stat Cards (Dashboard) ---- */
+.stat-card {
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s;
+}
+.stat-card:hover { transform: translateY(-2px); }
+
+.stat-card--blue   { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+.stat-card--green  { background: linear-gradient(135deg, #16a34a, #22c55e); }
+.stat-card--purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+
+.stat-card__icon { font-size: 2rem; opacity: .85; }
+.stat-card__value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+}
+.stat-card__label { font-size: .875rem; opacity: .85; font-weight: 500; }
+.stat-card__link {
+    color: rgba(255,255,255,.8);
+    text-decoration: none;
+    font-size: .82rem;
+    font-weight: 500;
+    transition: color .15s;
+}
+.stat-card__link:hover { color: #fff; }
+
+/* ---- Quick Action Cards ---- */
+.quick-action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: 1.5rem 1rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: .875rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow .2s, transform .2s, border-color .2s;
+}
+.quick-action-card i { font-size: 1.75rem; color: var(--primary); }
+.quick-action-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* ---- Avatar ---- */
+.avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #60a5fa);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .9rem;
+    flex-shrink: 0;
+}
+.avatar--sm { width: 28px; height: 28px; font-size: .75rem; }
+.avatar--lg { width: 72px; height: 72px; font-size: 1.8rem; }
+
+/* ---- Badges ---- */
+.badge-program {
+    background: #ede9fe;
+    color: var(--purple);
+    font-weight: 600;
+    font-size: .75rem;
+    padding: .3em .6em;
+}
+.badge-course {
+    background: #dbeafe;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: .75rem;
+    padding: .3em .6em;
+}
+
+/* ---- Tables ---- */
+.table-header th {
+    background: #f1f5f9;
+    font-size: .78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    padding: .75rem 1rem;
+}
+.table td { padding: .85rem 1rem; vertical-align: middle; }
+.table tbody tr:hover { background: #f8fafc; }
+
+/* ---- Buttons ---- */
+.btn { border-radius: 0.5rem; font-weight: 500; font-size: .875rem; }
+.btn-primary { background: var(--primary); border-color: var(--primary); }
+.btn-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+
+/* ---- Forms ---- */
+.form-control, .form-select {
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    font-size: .9rem;
+    padding: .55rem .9rem;
+    transition: border-color .15s, box-shadow .15s;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}
+.form-label { font-size: .875rem; margin-bottom: .35rem; }
+
+/* ---- Student banner (registration form) ---- */
+.student-banner {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: #f1f5f9;
+    border-radius: 0.6rem;
+    border: 1px solid var(--border);
+}
+
+/* ---- Empty state ---- */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+}
+
+/* ---- Alerts ---- */
+.alert { border-radius: var(--radius); font-size: .9rem; }
+
+/* ---- Breadcrumb ---- */
+.breadcrumb-item a {
+    text-decoration: none;
+    color: var(--primary);
+}
+.breadcrumb-item a:hover { text-decoration: underline; }
+
+/* ---- Responsive ---- */
+@media (max-width: 576px) {
+    .page-title { font-size: 1.3rem; }
+    .stat-card__value { font-size: 2rem; }
+}
+
+/* Custom Bootstrap theme variables */
+:root {
+    --bs-primary: #2563eb;
+    --bs-primary-dark: #1d4ed8;
+    --bs-body-font-family: 'DM Sans', sans-serif;
+    --bs-border-radius: 0.75rem;
+}

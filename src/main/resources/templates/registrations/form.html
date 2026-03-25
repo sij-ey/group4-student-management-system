@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head><title>Register for Course</title></head>
+<body>
+<main layout:fragment="content">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/students}">Students</a></li>
+                    <li class="breadcrumb-item">
+                        <a th:href="@{/students/profile/{id}(id=${student.id})}" th:text="${student.name}">Student</a>
+                    </li>
+                    <li class="breadcrumb-item active">Register for Course</li>
+                </ol>
+            </nav>
+
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-journal-plus me-2"></i>Register for a Course</h5>
+                </div>
+                <div class="card-body p-4">
+
+                    <!-- Student info banner -->
+                    <div class="student-banner mb-4">
+                        <div class="avatar me-3" th:text="${#strings.substring(student.name,0,1)}">A</div>
+                        <div>
+                            <div class="fw-bold" th:text="${student.name}">Student Name</div>
+                            <div class="text-muted small" th:text="${student.email}">email</div>
+                            <span class="badge badge-program mt-1" th:text="${student.program}">Program</span>
+                        </div>
+                    </div>
+
+                    <form th:action="@{/registrations/register}" method="post">
+                        <input type="hidden" name="studentId" th:value="${student.id}"/>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Select Course <span class="text-danger">*</span></label>
+                                <select class="form-select" name="courseId" required>
+                                    <option value="">-- Choose a course --</option>
+                                    <option th:each="course : ${courses}"
+                                            th:value="${course.id}"
+                                            th:text="${course.courseCode} + ' - ' + ${course.courseName} + ' (' + ${course.credits} + ' Credits)'">
+                                        Course
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Semester <span class="text-danger">*</span></label>
+                                <select class="form-select" name="semester" required>
+                                    <option value="">-- Choose a semester --</option>
+                                    <option th:each="sem : ${semesters}"
+                                            th:value="${sem}"
+                                            th:text="${sem}">
+                                        Semester
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-lg me-1"></i>Register
+                            </button>
+                            <a th:href="@{/students/profile/{id}(id=${student.id})}" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

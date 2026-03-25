@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+<main layout:fragment="content">
+
+    <div class="page-header mb-4">
+        <h2 class="page-title"><i class="bi bi-speedometer2 me-2"></i>Dashboard</h2>
+        <p class="text-muted">Welcome to the Student Course Registration &amp; Management System</p>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="row g-4 mb-5">
+        <div class="col-12 col-sm-6 col-lg-3">  <!-- Better breakpoints -->
+            <div class="stat-card stat-card--blue">
+                <div class="stat-card__icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <div class="stat-card__body">
+                    <div class="stat-card__value" th:text="${totalStudents}">0</div>
+                    <div class="stat-card__label">Total Students</div>
+                </div>
+                <a th:href="@{/students}" class="stat-card__link">View all <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="stat-card stat-card--green">
+                <div class="stat-card__icon">
+                    <i class="bi bi-book-fill"></i>
+                </div>
+                <div class="stat-card__body">
+                    <div class="stat-card__value" th:text="${totalCourses}">0</div>
+                    <div class="stat-card__label">Total Courses</div>
+                </div>
+                <a th:href="@{/courses}" class="stat-card__link">View all <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="stat-card stat-card--purple">
+                <div class="stat-card__icon">
+                    <i class="bi bi-card-checklist"></i>
+                </div>
+                <div class="stat-card__body">
+                    <div class="stat-card__value" th:text="${totalRegistrations}">0</div>
+                    <div class="stat-card__label">Total Registrations</div>
+                </div>
+                <a th:href="@{/registrations}" class="stat-card__link">View all <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="row g-4">
+        <div class="col-12">
+            <h5 class="section-title mb-3">Quick Actions</h5>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/students/new}" class="quick-action-card">
+                <i class="bi bi-person-plus-fill"></i>
+                <span>Add Student</span>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/courses/new}" class="quick-action-card">
+                <i class="bi bi-plus-circle-fill"></i>
+                <span>Add Course</span>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/students}" class="quick-action-card">
+                <i class="bi bi-search"></i>
+                <span>Find Student</span>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/registrations}" class="quick-action-card">
+                <i class="bi bi-list-ul"></i>
+                <span>All Registrations</span>
+            </a>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head><title th:text="${formTitle}">Student Form</title></head>
+<body>
+<main layout:fragment="content">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-7">
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/students}">Students</a></li>
+                    <li class="breadcrumb-item active" th:text="${formTitle}">Form</li>
+                </ol>
+            </nav>
+
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person-lines-fill me-2"></i>
+                        <span th:text="${formTitle}">Student Form</span>
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+
+                    <!-- ADD form (no ID) -->
+                    <form th:if="${student.id == null}"
+                          th:action="@{/students/save}"
+                          th:object="${student}"
+                          method="post"
+                          novalidate>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" th:field="*{name}" placeholder="Full Name">
+                                    <label>Full Name</label>
+                                </div>
+                                <div class="invalid-feedback" th:errors="*{name}">Name error</div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" th:field="*{email}" placeholder="Email Address">
+                                    <label>Email Address</label>
+                                </div>
+                                <div class="invalid-feedback" th:errors="*{email}">Email error</div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" th:field="*{program}" placeholder="Program">
+                                    <label>Program</label>
+                                </div>
+                                <div class="invalid-feedback" th:errors="*{program}">Program error</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" th:field="*{yearOfStudy}"
+                                            th:classappend="${#fields.hasErrors('yearOfStudy')} ? 'is-invalid' : ''">
+                                        <option value="">-- Select --</option>
+                                        <option value="1">Year 1</option>
+                                        <option value="2">Year 2</option>
+                                        <option value="3">Year 3</option>
+                                        <option value="4">Year 4</option>
+                                        <option value="5">Year 5</option>
+                                        <option value="6">Year 6</option>
+                                    </select>
+                                    <label>Year of Study</label>
+                                </div>
+                                <div class="invalid-feedback" th:errors="*{yearOfStudy}">Year error</div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-lg me-1"></i>Save Student
+                            </button>
+                            <a th:href="@{/students}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+
+                    <!-- EDIT form (has ID) -->
+                    <form th:if="${student.id != null}"
+                          th:action="@{/students/update/{id}(id=${student.id})}"
+                          th:object="${student}"
+                          method="post"
+                          novalidate>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" th:field="*{name}" placeholder="Full Name">
+                                    <label>Full Name</label>
+                                </div>
+                                <div class="invalid-feedback" th:errors="*{name}">Name error</div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" th:field="*{email}" placeholder="Email Address">
+                                    <label>Email Address</label>
+                                </div>
+                                <div class="invalid-feedback" th:errors="*{email}">Email error</div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" th:field="*{program}" placeholder="Program">
+                                    <label>Program</label>
+                                </div>
+                                <div class="invalid-feedback" th:errors="*{program}">Program error</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" th:field="*{yearOfStudy}"
+                                            th:classappend="${#fields.hasErrors('yearOfStudy')} ? 'is-invalid' : ''">
+                                        <option value="1">Year 1</option>
+                                        <option value="2">Year 2</option>
+                                        <option value="3">Year 3</option>
+                                        <option value="4">Year 4</option>
+                                        <option value="5">Year 5</option>
+                                        <option value="6">Year 6</option>
+                                    </select>
+                                    <label>Year of Study</label>
+                                </div>
+                                <div class="invalid-feedback" th:errors="*{yearOfStudy}">Year error</div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="bi bi-pencil me-1"></i>Update Student
+                            </button>
+                            <a th:href="@{/students}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

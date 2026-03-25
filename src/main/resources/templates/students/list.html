@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head><title>Students</title></head>
+<body>
+<main layout:fragment="content">
+
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="page-title"><i class="bi bi-people me-2"></i>Students</h2>
+            <p class="text-muted mb-0">Manage all registered students</p>
+        </div>
+        <a th:href="@{/students/new}" class="btn btn-primary">
+            <i class="bi bi-person-plus me-1"></i>Add Student
+        </a>
+    </div>
+
+    <!-- Empty state -->
+    <div th:if="${#lists.isEmpty(students)}" class="empty-state">
+        <i class="bi bi-people display-1 text-muted"></i>
+        <h5 class="mt-3">No students found</h5>
+        <p class="text-muted">Get started by adding your first student.</p>
+        <a th:href="@{/students/new}" class="btn btn-primary mt-2">
+            <i class="bi bi-person-plus me-1"></i>Add Student
+        </a>
+    </div>
+
+    <!-- Students table -->
+    <div th:if="${!#lists.isEmpty(students)}" class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-header">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Program</th>
+                            <th>Year</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="student, stat : ${students}">
+                            <td class="text-muted small" th:text="${stat.count}">1</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar" th:text="${#strings.substring(student.name, 0, 1)}">A</div>
+                                    <span class="fw-semibold" th:text="${student.name}">Name</span>
+                                </div>
+                            </td>
+                            <td class="text-muted" th:text="${student.email}">email</td>
+                            <td>
+                                <span class="badge badge-program" th:text="${student.program}">Program</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border" th:text="'Year ' + ${student.yearOfStudy}">Year 1</span>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a th:href="@{/students/profile/{id}(id=${student.id})}"
+                                       class="btn btn-outline-info" title="View Profile">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a th:href="@{/students/edit/{id}(id=${student.id})}"
+                                       class="btn btn-outline-warning" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a th:href="@{/registrations/new/{id}(id=${student.id})}"
+                                       class="btn btn-outline-success" title="Register for Course">
+                                        <i class="bi bi-journal-plus"></i>
+                                    </a>
+                                    <a th:href="@{/students/delete/{id}(id=${student.id})}"
+                                       class="btn btn-outline-danger"
+                                       title="Delete"
+                                       onclick="return confirm('Are you sure you want to delete this student? This will also remove all their registrations.')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-muted small">
+            Total: <strong th:text="${#lists.size(students)}">0</strong> student(s)
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
